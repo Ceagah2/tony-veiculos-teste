@@ -18,7 +18,20 @@ As a front end test, i'll choose to use this bunch of techs.
 
 - [Styled Components](https://www.styled-components.com), the best css-in-js lib;
 - [Vite](https://vitejs.dev/), to create the React project;
+- [Axios](https://axios-http.com/), to make http requests;
 - [Vitest](https://vitest.dev/), to test everything;
+
+## Why these ?
+
+This stack is the one I am most familiar with working in, and I feel very comfortable with it, allowing me to extract all my potential as a developer. Since whenever I can, I choose the same tools.
+
+## Some hacks that i've use.
+
+To avoid creating a local mock file and paying to access the FIPE table, I went after the API that Tony Veiculos themselves use, in order to maintain the authenticity of the data and minimize the fabrication of prices and products as much as possible. I won't describe the method I used to find this API, as I am certain it's a private API, and I won't disclose it here in the documentation.
+
+## Patterns that i've followed
+
+- YAGNI: `you ain't gonna need it`. All the libraries were installed as needed. None were installed before they were required.
 
 ## How to run the project
 
@@ -42,4 +55,4 @@ As a front end test, i'll choose to use this bunch of techs.
 
 - Now you just should open in your browser the application, that is at `http://localhost:5173/`
 
-## Developed with ♥ by [Ceagah.dev](https://www.linkedin.com/in/carlosceagah)
+## Developed with ♥ by [Fantasy Forge](https://www.linkedin.com/in/carlosceagah)
