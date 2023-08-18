@@ -1,27 +1,45 @@
-# React + TypeScript + Vite
+# Front end test - Tony Veículos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Challenge Objective
 
-Currently, two official plugins are available:
+Render a list of cars with the following data:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Brand
+- Model
+- Year
+- Price
 
-## Expanding the ESLint configuration
+The form should be validated before the user can submit the data, and after that, a completion message should appear for the user.
+The user will be able to select a car from this list, and should be taken to a screen with the detailed car information, and a contact form for generating sales leads.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies used
 
-- Configure the top-level `parserOptions` property like this:
+As a front end test, i'll choose to use this bunch of techs.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- [Styled Components](https://www.styled-components.com), the best css-in-js lib;
+- [Vite](https://vitejs.dev/), to create the React project;
+- [Vitest](https://vitest.dev/), to test everything;
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## How to run the project
+
+- First thing first, you should have git locally installed (Windows olny. Linux and Mac get this native).
+  To make sure you have git, open your terminal, then type:  
+  `git --version`  
+  You should get a return like this:  
+  ` git version 2.34.1`
+
+- Second step, clone the repo. To clone the repo, you should type on your terminal:  
+  ` git clone git@github.com:Ceagah2/tony-veiculos-teste.git`
+
+- Third, you should jump into this new repo.  
+  `cd tony-veiculos-teste`
+
+- Fourth, you should install the dependencies.
+  `npm i` or `yarn`
+
+- Last but not least, you should run the application.
+  `npm run dev` or `yarn dev`
+
+- Now you just should open in your browser the application, that is at `http://localhost:5173/`
+
+## Developed with ♥ by [Ceagah.dev](https://www.linkedin.com/in/carlosceagah)
