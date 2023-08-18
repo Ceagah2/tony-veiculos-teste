@@ -32,6 +32,7 @@ To avoid creating a local mock file and paying to access the FIPE table, I went 
 ## Patterns that i've followed
 
 - YAGNI: `you ain't gonna need it`. All the libraries were installed as needed. None were installed before they were required.
+- Conventional Commits;
 
 ## How to run the project
 
