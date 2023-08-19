@@ -19,7 +19,7 @@ As a front end test, i'll choose to use this bunch of techs.
 - [Styled Components](https://www.styled-components.com), the best css-in-js lib;
 - [Vite](https://vitejs.dev/), to create the React project;
 - [Axios](https://axios-http.com/), to make http requests;
-- [Vitest](https://vitest.dev/), to test everything;
+- [Jest](https://jestjs.io/), i'll use vitest, but jest get more documentation.
 
 ## Why these ?
 
