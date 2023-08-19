@@ -6,23 +6,21 @@ export interface VehicleProps {
   color: string;
   fabricationYear: number;
   fuelType: string;
+  fipeId: string;
   id: number;
+  kmVehicle: number;
   make: string;
   model: string;
   modelYear: number;
   numberDoors: number;
   optional: string[];
-  photos: [];
   price: number;
-  transmission: string;
-  vehicleType: string;
+  photos: [
+    {
+      id: number;
+      url: string;
+    },
+  ];
   version: string;
-}
-
-export interface CardProps {
-  image: string;
-  make: string;
-  model: string;
-  modelYear: number;
-  price: number;
+  vehicleType: string;
 }
