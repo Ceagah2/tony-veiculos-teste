@@ -20,6 +20,7 @@ export const theme = {
     subHeading: '1.25rem',
     body: '1rem',
     description: '0.75rem',
+    small: '0.5rem',
   },
   fontWeights: {
     bold: 700,
