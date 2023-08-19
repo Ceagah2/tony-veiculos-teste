@@ -2,9 +2,9 @@ export const theme = {
   colors: {
     white: '#fff',
     black: '#000',
-    Blue: '#0074D9',
-    Red: 'FF4136',
-    LightGray: '#F0F0F0',
+    blue: '#0074D9',
+    red: 'FF4136',
+    lightGray: '#F0F0F0',
 
     success: '#2ecc71',
     error: '#e74c3c',
@@ -16,7 +16,7 @@ export const theme = {
     body: 'Roboto',
   },
   fontSizes: {
-    heading: '1.5rem',
+    heading: '2rem',
     subHeading: '1.25rem',
     body: '1rem',
     description: '0.75rem',
