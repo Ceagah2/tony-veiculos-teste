@@ -1,4 +1,4 @@
-import { VehicleProps } from '@/@types';
+import { type CardProps } from '@/@types';
 import { AiOutlineCar } from 'react-icons/ai';
 import { BiGasPump } from 'react-icons/bi';
 import { BsCalendarWeek } from 'react-icons/bs';
@@ -17,7 +17,7 @@ import {
   Container,
 } from './styles';
 
-const Card = (props: VehicleProps) => {
+const Card = (props: CardProps) => {
   const priceWithoutDecimal = props.price.toString().slice(0, -2);
   const newPrice = parseFloat(priceWithoutDecimal);
   const formattedPrice = new Intl.NumberFormat('pt-BR', {
@@ -25,7 +25,7 @@ const Card = (props: VehicleProps) => {
     currency: 'BRL',
   }).format(newPrice);
   return (
-    <Container>
+    <Container onClick={props.onClick}>
       <CardImageContainer>
         <CardImage src={props.photos} />
       </CardImageContainer>

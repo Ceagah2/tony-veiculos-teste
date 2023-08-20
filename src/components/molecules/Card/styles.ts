@@ -15,6 +15,19 @@ export const Container = styled.div`
     margin-top: -20px;
     box-shadow: 0px 5px 20px 0px #000;
   }
+  @media (max-width: 1300px) {
+    width: 40vw;
+  }
+  @media (max-width: 1000px) {
+    width: 50vw;
+  }
+  @media (max-width: 750px) {
+    width: 75%;
+  }
+  @media (max-width: 540px) {
+    width: 90%;
+    height: 250px;
+  }
 `;
 export const CardImageContainer = styled.div`
   width: 200px;
@@ -75,6 +88,9 @@ export const CardLineDetailsDiv = styled.div`
   justify-content: space-around;
   align-items: center;
   padding: 10px;
+  @media (max-width: 540px) {
+    display: none;
+  }
 `;
 export const CardDetailText = styled.span`
   font-family: ${theme.fonts.body};

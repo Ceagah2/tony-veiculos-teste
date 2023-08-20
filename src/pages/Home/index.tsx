@@ -1,15 +1,17 @@
 import { type VehicleProps } from '@/@types';
+import NoImage from '@/assets/noImage.png';
 import Container from '@/components/atoms/Container';
 import Header from '@/components/atoms/Header';
 import Card from '@/components/molecules/Card';
-import NoImage from '@/public/noImage.png';
 import { Api } from '@/services/api';
 import { useEffect, useState } from 'react';
-import { CardsContainer, Content, ContentHeader } from './styles';
+import { useNavigate } from 'react-router-dom';
+import { CardsContainer, Content, ContentHeader, HeaderText } from './styles';
 
 const Home = () => {
   const LIMIT = 30;
   const OFFSET = 60; // esse offset tem menos carros sem imagem
+  const navigate = useNavigate();
   const [carsData, setCarsData] = useState([]);
   const [errorMessage, setErrorMessage] = useState<boolean>();
 
@@ -51,7 +53,9 @@ const Home = () => {
       <Header />
       <Content>
         <ContentHeader>
-          Encontre aqui os melhores carros disponíveis no mercado.
+          <HeaderText>
+            Encontre aqui os melhores carros disponíveis no mercado.
+          </HeaderText>
         </ContentHeader>
         <CardsContainer>
           {errorMessage ? (
@@ -70,6 +74,7 @@ const Home = () => {
                 fabricationYear={car.fabricationYear}
                 fuelType={car.fuelType}
                 kmVehicle={car.kmVehicle}
+                onClick={() => navigate(`/car/${car.id}`)}
               />
             ))
           )}

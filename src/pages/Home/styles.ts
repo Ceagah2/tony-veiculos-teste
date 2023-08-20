@@ -16,6 +16,9 @@ export const ContentHeader = styled.header`
   align-items: center;
   justify-content: center;
 `;
+export const HeaderText = styled.h1`
+  text-align: center;
+`;
 export const CardsContainer = styled.section`
   width: 100%;
   height: 90%;

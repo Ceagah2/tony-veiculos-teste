@@ -24,3 +24,7 @@ export interface VehicleProps {
   version: string;
   vehicleType: string;
 }
+
+export interface CardProps extends VehicleProps {
+  onClick: () => void;
+}
