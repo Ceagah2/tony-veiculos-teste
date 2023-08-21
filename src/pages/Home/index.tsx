@@ -2,17 +2,18 @@ import { type VehicleProps } from '@/@types';
 import NoImage from '@/assets/noImage.png';
 import Container from '@/components/atoms/Container';
 import Header from '@/components/atoms/Header';
-import Card from '@/components/molecules/Card';
+import Loader from '@/components/atoms/Loader';
 import { Api } from '@/services/api';
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardsContainer, Content, ContentHeader, HeaderText } from './styles';
 
 const Home = () => {
+  const Card = lazy(() => import('@/components/molecules/Card'));
   const LIMIT = 30;
   const OFFSET = 60; // esse offset tem menos carros sem imagem
   const navigate = useNavigate();
-  const [carsData, setCarsData] = useState([]);
+  const [carsData, setCarsData] = useState<VehicleProps[]>([]);
   const [errorMessage, setErrorMessage] = useState<boolean>();
 
   useEffect(() => {
@@ -35,7 +36,6 @@ const Home = () => {
                 return vehicle;
               },
             );
-
             setCarsData(modifiedCarsData);
           } else {
             setErrorMessage(true);
@@ -58,26 +58,28 @@ const Home = () => {
           </HeaderText>
         </ContentHeader>
         <CardsContainer>
-          {errorMessage ? (
-            <h1>Error</h1>
-          ) : (
-            carsData.map((car: VehicleProps) => (
-              <Card
-                photos={car.photos ? car.photos[0].url : NoImage}
-                key={car.id}
-                make={car.make}
-                model={car.model}
-                modelYear={car.modelYear}
-                price={car.price}
-                optional={car.optional}
-                fipeId={car.fipeId}
-                fabricationYear={car.fabricationYear}
-                fuelType={car.fuelType}
-                kmVehicle={car.kmVehicle}
-                onClick={() => navigate(`/car/${car.id}`)}
-              />
-            ))
-          )}
+          <Suspense fallback={<Loader />}>
+            {errorMessage ? (
+              <h1>Error</h1>
+            ) : (
+              carsData.map((car: VehicleProps) => (
+                <Card
+                  photos={car.photos ? car.photos[0].url : NoImage}
+                  key={car.id}
+                  make={car.make}
+                  model={car.model}
+                  modelYear={car.modelYear}
+                  price={car.price}
+                  optional={car.optional}
+                  fipeId={car.fipeId}
+                  fabricationYear={car.fabricationYear}
+                  fuelType={car.fuelType}
+                  kmVehicle={car.kmVehicle}
+                  onClick={() => navigate(`/car/${car.id}`)}
+                />
+              ))
+            )}
+          </Suspense>
         </CardsContainer>
       </Content>
     </Container>
