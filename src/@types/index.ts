@@ -1,3 +1,5 @@
+import { InputHTMLAttributes } from 'react';
+
 export interface ContainerProps {
   children: React.ReactNode;
 }
@@ -27,4 +29,15 @@ export interface VehicleProps {
 
 export interface CardProps extends VehicleProps {
   onClick: () => void;
+}
+
+export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+}
+
+export interface ButtonsProps {
+  text: string;
+  onClick: () => void;
+  backgroundColor: string;
+  textColor: string;
 }
