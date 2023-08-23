@@ -1,16 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { UserDataProps, type VehicleProps } from '@/@types';
-import noImage from '@/assets/noImage.png';
-import Button from '@/components/atoms/Button';
-import Container from '@/components/atoms/Container';
-import Header from '@/components/atoms/Header';
-import Loader from '@/components/atoms/Loader';
-import TextInput from '@/components/atoms/TextInput';
-import Alert from '@/components/molecules/Alert';
-import { Api } from '@/services/api';
-import { theme } from '@/styles/theme';
-import { formatPhoneNumber, isValidEmail } from '@/utils';
 import { useEffect, useState } from 'react';
 import {
   FaCalendar,
@@ -20,6 +8,16 @@ import {
 } from 'react-icons/fa';
 import { GiCarDoor } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
+import { UserDataProps, type VehicleProps } from '../../@types';
+import Button from '../../components/atoms/Button';
+import Container from '../../components/atoms/Container';
+import Header from '../../components/atoms/Header';
+import Loader from '../../components/atoms/Loader';
+import TextInput from '../../components/atoms/TextInput';
+import Alert from '../../components/molecules/Alert';
+import { Api } from '../../services/api';
+import { theme } from '../../styles/theme';
+import { formatPhoneNumber, isValidEmail } from '../../utils';
 import {
   CarContainer,
   ContainerTitle,
@@ -42,6 +40,7 @@ import {
 } from './styles';
 
 const CarDetails = () => {
+  const NoImage = 'https://tonyveiculos.com.br/img/carro-semfoto.png';
   const [dataError, setDataError] = useState<boolean>();
   const [emailError, setEmailError] = useState<boolean>();
   const [carData, setCarData] = useState<VehicleProps>();
@@ -64,7 +63,7 @@ const CarDetails = () => {
         setCarData(response.data.vehicle);
         response.data.vehicle.photos[3].url
           ? setCarImage(response.data.vehicle.photos[3].url)
-          : setCarImage(noImage);
+          : setCarImage(NoImage);
       });
     } catch {
       navigate('/404Error');
@@ -155,7 +154,7 @@ const CarDetails = () => {
                 <FaTachometerAlt />
               </DetailsIcon>
               <DetailsText>
-                {carData?.kmVehicle.toLocaleString()} KM
+                {carData?.kmVehicle.toLocaleString()} Kms
               </DetailsText>
             </DetailsSquare>
             <DetailsSquare>

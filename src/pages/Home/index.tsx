@@ -1,20 +1,28 @@
-import { type VehicleProps } from '@/@types';
-import NoImage from '@/assets/noImage.png';
-import Container from '@/components/atoms/Container';
-import Header from '@/components/atoms/Header';
-import Loader from '@/components/atoms/Loader';
-import { Api } from '@/services/api';
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CardsContainer, Content, ContentHeader, HeaderText } from './styles';
+import { type VehicleProps } from '../../@types';
+import Container from '../../components/atoms/Container';
+import Header from '../../components/atoms/Header';
+import Loader from '../../components/atoms/Loader';
+import { Api } from '../../services/api';
+import {
+  CardsContainer,
+  Content,
+  ContentHeader,
+  ErrorContainer,
+  ErrorText,
+  HeaderText,
+} from './styles';
 
 const Home = () => {
-  const Card = lazy(() => import('@/components/molecules/Card'));
+  const Card = lazy(() => import('../../components/molecules/Card'));
   const LIMIT = 30;
   const OFFSET = 60; // esse offset tem menos carros sem imagem
   const navigate = useNavigate();
+  const NoImage = 'https://tonyveiculos.com.br/img/carro-semfoto.png';
   const [carsData, setCarsData] = useState<VehicleProps[]>([]);
   const [errorMessage, setErrorMessage] = useState<boolean>();
+  const [carImage, setCarImage] = useState<string>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +44,9 @@ const Home = () => {
                 return vehicle;
               },
             );
+            response.data.vehicles.photos[3]
+              ? setCarImage(response.data.vehicles.photos[3].url)
+              : setCarImage(NoImage);
             setCarsData(modifiedCarsData);
           } else {
             setErrorMessage(true);
@@ -45,8 +56,6 @@ const Home = () => {
     };
     fetchData();
   }, []);
-
-  console.log(carsData);
 
   return (
     <Container>
@@ -60,11 +69,13 @@ const Home = () => {
         <CardsContainer>
           <Suspense fallback={<Loader />}>
             {errorMessage ? (
-              <h1>Error</h1>
+              <ErrorContainer data-testid="error-message">
+                <ErrorText>Não há carros disponíveis</ErrorText>
+              </ErrorContainer>
             ) : (
               carsData.map((car: VehicleProps) => (
                 <Card
-                  photos={car.photos ? car.photos[0].url : NoImage}
+                  photos={carImage}
                   key={car.id}
                   make={car.make}
                   model={car.model}

@@ -1,5 +1,5 @@
-import { type CardProps } from '@/@types';
 import { FaCalendarAlt, FaGasPump, FaTachometerAlt } from 'react-icons/fa';
+import { type CardProps } from '../../../@types';
 import {
   CardContent,
   CardDescription,

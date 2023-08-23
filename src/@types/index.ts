@@ -1,30 +1,27 @@
 import { InputHTMLAttributes } from 'react';
 
+declare module '*.png';
+
 export interface ContainerProps {
   children: React.ReactNode;
 }
 
 export interface VehicleProps {
-  color: string;
+  color?: string;
   fabricationYear: number;
   fuelType: string;
   fipeId: string;
-  id: number;
+  id?: number;
   kmVehicle: number;
   make: string;
   model: string;
   modelYear: number;
-  numberDoors: number;
+  numberDoors?: number;
   optional: string[];
   price: number;
-  photos: [
-    {
-      id: number;
-      url: string;
-    },
-  ];
-  version: string;
-  vehicleType: string;
+  photos?: string | undefined;
+  version?: string;
+  vehicleType?: string;
 }
 
 export interface CardProps extends VehicleProps {

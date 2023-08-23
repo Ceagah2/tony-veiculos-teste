@@ -1,5 +1,5 @@
-import { type AlertProps } from '@/@types';
-import Button from '@/components/atoms/Button';
+import { type AlertProps } from '../../../@types';
+import Button from '../../atoms/Button';
 import {
   AlertText,
   AlertTitle,

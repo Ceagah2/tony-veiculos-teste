@@ -1,8 +1,9 @@
-import Logo from '@/assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { Container, HeaderLogo, HeaderTitle } from './styles';
 
 const Header = () => {
+  const Logo = 'https://tonyveiculos.com.br/img/logo.png';
+
   const navigate = useNavigate();
   return (
     <Container>

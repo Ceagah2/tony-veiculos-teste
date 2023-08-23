@@ -1,4 +1,4 @@
-import { ButtonsProps } from '@/@types';
+import { ButtonsProps } from '../../../@types';
 import { ButtonText, Container } from './styles';
 
 const Button = (props: ButtonsProps) => {

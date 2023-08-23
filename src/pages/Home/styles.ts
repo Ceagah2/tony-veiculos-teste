@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import styled from 'styled-components';
 
 export const Content = styled.section`
@@ -29,4 +30,18 @@ export const CardsContainer = styled.section`
   align-items: center;
   gap: 20px;
   padding: 20px;
+`;
+
+export const ErrorContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+export const ErrorText = styled.span`
+  color: ${theme.colors.error};
+  font-weight: ${theme.fontWeights.bold};
+  font-size: ${theme.fontSizes.body};
+  text-align: center;
 `;
