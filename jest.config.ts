@@ -1,10 +1,11 @@
 import type { Config } from 'jest';
 
-const config: Config = {
-  clearMocks: true,
-  collectCoverage: true,
-  coverageDirectory: 'coverage',
-  coverageProvider: 'v8',
+export default async (): Promise<Config> => {
+  return {
+    verbose: true,
+    preset: 'ts-jest',
+    testEnvironment: 'node',
+    modulePaths: ['<rootDir>'],
+    rootDir: './src',
+  };
 };
-
-export default config;
