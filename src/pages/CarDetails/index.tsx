@@ -59,12 +59,16 @@ const CarDetails = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    await Api.get(`/vehicles/${carId}`).then((response) => {
-      setCarData(response.data.vehicle);
-      response.data.vehicle.photos[3].url
-        ? setCarImage(response.data.vehicle.photos[3].url)
-        : setCarImage(noImage);
-    });
+    try {
+      await Api.get(`/vehicles/${carId}`).then((response) => {
+        setCarData(response.data.vehicle);
+        response.data.vehicle.photos[3].url
+          ? setCarImage(response.data.vehicle.photos[3].url)
+          : setCarImage(noImage);
+      });
+    } catch {
+      navigate('/404Error');
+    }
     setLoading(false);
   };
 
