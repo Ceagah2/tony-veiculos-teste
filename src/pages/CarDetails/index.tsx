@@ -1,12 +1,25 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { type VehicleProps } from '@/@types';
+import { UserDataProps, type VehicleProps } from '@/@types';
+import noImage from '@/assets/noImage.png';
 import Button from '@/components/atoms/Button';
 import Container from '@/components/atoms/Container';
 import Header from '@/components/atoms/Header';
+import Loader from '@/components/atoms/Loader';
+import TextInput from '@/components/atoms/TextInput';
+import Alert from '@/components/molecules/Alert';
 import { Api } from '@/services/api';
 import { theme } from '@/styles/theme';
+import { formatPhoneNumber, isValidEmail } from '@/utils';
 import { useEffect, useState } from 'react';
+import {
+  FaCalendar,
+  FaGasPump,
+  FaPalette,
+  FaTachometerAlt,
+} from 'react-icons/fa';
+import { GiCarDoor } from 'react-icons/gi';
+import { useNavigate } from 'react-router-dom';
 import {
   CarContainer,
   ContainerTitle,
@@ -15,84 +28,212 @@ import {
   DetailsRow,
   DetailsSquare,
   DetailsText,
+  ErrorMessage,
   HeaderContainer,
   HeaderImage,
   LeadButtonContainer,
   LeadContainer,
   LeadContainerTitle,
   LeadInputsContainer,
+  LoaderContainer,
   OptionsSection,
   OptionsText,
+  OptionsTitle,
 } from './styles';
 
 const CarDetails = () => {
-  const [error, setError] = useState<boolean>();
+  const [dataError, setDataError] = useState<boolean>();
+  const [emailError, setEmailError] = useState<boolean>();
   const [carData, setCarData] = useState<VehicleProps>();
+  const [loading, setLoading] = useState<boolean>();
+  const [carImage, setCarImage] = useState<string>();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [userData, setUserData] = useState<UserDataProps>({
+    name: '',
+    email: '',
+    phone: '',
+  });
   const path = window.location.href;
   const carId = path.split('/')[path.split('/').length - 1];
+  const navigate = useNavigate();
 
   const fetchData = async () => {
+    setLoading(true);
     await Api.get(`/vehicles/${carId}`).then((response) => {
-      if (response.data.message !== 'Vehicles found successfully') {
-        setError(true);
-      }
       setCarData(response.data.vehicle);
+      response.data.vehicle.photos[3].url
+        ? setCarImage(response.data.vehicle.photos[3].url)
+        : setCarImage(noImage);
     });
+    setLoading(false);
   };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const phone = e.target.value;
+    const formattedPhone = formatPhoneNumber(phone);
+    setUserData({ ...userData, phone: formattedPhone });
+  };
+
+  const handleSendData = () => {
+    const email = userData.email;
+    const checkAnyFieldEmpty = !userData.name || !userData.phone || !email;
+
+    console.log(checkAnyFieldEmpty);
+
+    if (checkAnyFieldEmpty) {
+      setDataError(true);
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setEmailError(true);
+      return;
+    }
+
+    if (checkAnyFieldEmpty === false && isValidEmail(email)) {
+      setDataError(false);
+      setEmailError(false);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setUserData({
+      name: '',
+      email: '',
+      phone: '',
+    });
+    navigate('/');
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
-
-  console.log(carData);
 
   return (
     <Container>
       <Header />
       <Content>
+        {loading && (
+          <LoaderContainer>
+            <Loader />
+          </LoaderContainer>
+        )}
         <CarContainer>
           <HeaderContainer>
-            <HeaderImage src={carData?.photos[0].url} />
+            <HeaderImage src={carImage} />
           </HeaderContainer>
-          <ContainerTitle></ContainerTitle>
+          <ContainerTitle>{carData?.fipeId}</ContainerTitle>
           <DetailsRow>
             <DetailsSquare>
-              <DetailsText></DetailsText>
-              <DetailsIcon></DetailsIcon>
+              <DetailsIcon>
+                <FaCalendar />
+              </DetailsIcon>
+              <DetailsText>
+                {carData?.fabricationYear}/{carData?.modelYear}
+              </DetailsText>
             </DetailsSquare>
             <DetailsSquare>
-              <DetailsText></DetailsText>
-              <DetailsIcon></DetailsIcon>
+              <DetailsIcon>
+                <FaGasPump />
+              </DetailsIcon>
+              <DetailsText>{carData?.fuelType}</DetailsText>
             </DetailsSquare>
             <DetailsSquare>
-              <DetailsText></DetailsText>
-              <DetailsIcon></DetailsIcon>
+              <DetailsIcon>
+                <FaPalette />
+              </DetailsIcon>
+              <DetailsText>{carData?.color}</DetailsText>
             </DetailsSquare>
             <DetailsSquare>
-              <DetailsText></DetailsText>
-              <DetailsIcon></DetailsIcon>
+              <DetailsIcon>
+                <FaTachometerAlt />
+              </DetailsIcon>
+              <DetailsText>
+                {carData?.kmVehicle.toLocaleString()} KM
+              </DetailsText>
             </DetailsSquare>
             <DetailsSquare>
-              <DetailsText></DetailsText>
-              <DetailsIcon></DetailsIcon>
+              <DetailsIcon>
+                <GiCarDoor />
+              </DetailsIcon>
+              <DetailsText>{carData?.numberDoors} Portas</DetailsText>
             </DetailsSquare>
           </DetailsRow>
           <OptionsSection>
-            <OptionsText></OptionsText>
+            <OptionsTitle>Opcionais</OptionsTitle>
+            <OptionsText>
+              {carData?.optional.map((option) => option).join(', ')}
+            </OptionsText>
           </OptionsSection>
         </CarContainer>
         <LeadContainer>
-          <LeadContainerTitle></LeadContainerTitle>
-          <LeadInputsContainer></LeadInputsContainer>
+          <LeadContainerTitle>Entre em contato</LeadContainerTitle>
+          <LeadInputsContainer>
+            <TextInput
+              label="Nome completo"
+              name="name"
+              type="text"
+              value={userData.name}
+              onChange={(e) =>
+                setUserData({ ...userData, name: e.target.value })
+              }
+            />
+          </LeadInputsContainer>
+          <LeadInputsContainer>
+            <TextInput
+              label="Telefone para contato"
+              name="phone"
+              type="text"
+              value={userData.phone}
+              placeholder="(99) 9 9999-9999"
+              maxLength={15}
+              onChange={handlePhoneChange}
+            />
+          </LeadInputsContainer>
+          <LeadInputsContainer>
+            <TextInput
+              label="E-mail"
+              name="email"
+              type="text"
+              value={userData.email}
+              onChange={(e) =>
+                setUserData({ ...userData, email: e.target.value })
+              }
+            />
+          </LeadInputsContainer>
+          {emailError && (
+            <ErrorMessage>
+              E-mail incorreto. Por favor verifique e tente novamente
+            </ErrorMessage>
+          )}
+          {dataError && (
+            <ErrorMessage>
+              Todos os campos são obrigatórios para que nossa equipe entre em
+              contato com você.
+            </ErrorMessage>
+          )}
           <LeadButtonContainer>
             <Button
               text="Quero comprar"
-              onClick={() => console.log('Comprando ...')}
+              onClick={() => handleSendData()}
               textColor={theme.colors.white}
-              backgroundColor={theme.colors.success}
+              backgroundColor={theme.colors.blue}
             />
           </LeadButtonContainer>
         </LeadContainer>
       </Content>
+      {isModalOpen && (
+        <Alert
+          onClose={() => handleModalClose()}
+          title={'Dados enviados com sucesso'}
+          text={
+            'Prontinho, agora é só aguardar nossa equipe entrar em contato para maiores detalhes sobre o carro.'
+          }
+          isOpen={isModalOpen}
+        />
+      )}
     </Container>
   );
 };
