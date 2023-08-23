@@ -38,6 +38,19 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 export interface ButtonsProps {
   text: string;
   onClick: () => void;
-  backgroundColor: string;
-  textColor: string;
+  backgroundColor?: string;
+  textColor?: string;
+}
+
+export interface UserDataProps {
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export interface AlertProps {
+  title: string;
+  text: string;
+  onClose: () => void;
+  isOpen: boolean;
 }
