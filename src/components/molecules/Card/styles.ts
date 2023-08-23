@@ -97,5 +97,6 @@ export const CardDetailText = styled.span`
   font-size: ${theme.fontSizes.description};
   text-align: center;
   display: flex;
+  margin-right: 5px;
 `;
 export const CardOptions = styled.span``;

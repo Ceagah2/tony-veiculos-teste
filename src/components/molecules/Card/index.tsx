@@ -1,7 +1,5 @@
 import { type CardProps } from '@/@types';
-import { AiOutlineCar } from 'react-icons/ai';
-import { BiGasPump } from 'react-icons/bi';
-import { BsCalendarWeek } from 'react-icons/bs';
+import { FaCalendarAlt, FaGasPump, FaTachometerAlt } from 'react-icons/fa';
 import {
   CardContent,
   CardDescription,
@@ -40,15 +38,15 @@ const Card = (props: CardProps) => {
         <CardPrice>{formattedPrice}</CardPrice>
         <CardLineDetailsDiv>
           <CardDetailText>
-            <BsCalendarWeek />
+            <FaCalendarAlt style={{ marginRight: '3px' }} />
             {props.fabricationYear}/{props.modelYear}
           </CardDetailText>
           <CardDetailText>
-            <BiGasPump />
+            <FaGasPump style={{ marginRight: '3px' }} />
             {props.fuelType}
           </CardDetailText>
           <CardDetailText>
-            <AiOutlineCar />
+            <FaTachometerAlt style={{ marginRight: '3px' }} />
             {props.kmVehicle}
           </CardDetailText>
         </CardLineDetailsDiv>
