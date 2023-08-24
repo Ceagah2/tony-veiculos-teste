@@ -11,7 +11,7 @@ import {
 const Alert = (props: AlertProps) => {
   return (
     <Container>
-      <Content isOpen={props.isOpen}>
+      <Content isopen={props.isopen}>
         <AlertTitle>{props.title}</AlertTitle>
         <AlertText>{props.text}</AlertText>
         <ButtonContainer>

@@ -8,7 +8,7 @@ import {
 } from 'react-icons/fa';
 import { GiCarDoor } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
-import { UserDataProps, type VehicleProps } from '../../@types';
+import { CarDetailsProps, UserDataProps, VehicleProps } from '../../@types';
 import Button from '../../components/atoms/Button';
 import Container from '../../components/atoms/Container';
 import Header from '../../components/atoms/Header';
@@ -38,7 +38,7 @@ import {
   OptionsTitle,
 } from './styles';
 
-const CarDetails = () => {
+const CarDetails: React.FC<CarDetailsProps> = () => {
   const NoImage = 'https://tonyveiculos.com.br/img/carro-semfoto.png';
   const [dataError, setDataError] = useState<boolean>();
   const [emailError, setEmailError] = useState<boolean>();
@@ -178,6 +178,8 @@ const CarDetails = () => {
               name="name"
               type="text"
               value={userData.name}
+              for="name"
+              id="name"
               onChange={(e) =>
                 setUserData({ ...userData, name: e.target.value })
               }
@@ -188,6 +190,8 @@ const CarDetails = () => {
               label="Telefone para contato"
               name="phone"
               type="text"
+              for="phone"
+              id="phone"
               value={userData.phone}
               placeholder="(99) 9 9999-9999"
               maxLength={15}
@@ -199,6 +203,8 @@ const CarDetails = () => {
               label="E-mail"
               name="email"
               type="text"
+              for="email"
+              id="email"
               value={userData.email}
               onChange={(e) =>
                 setUserData({ ...userData, email: e.target.value })
@@ -228,7 +234,7 @@ const CarDetails = () => {
           text={
             'Prontinho, agora é só aguardar nossa equipe entrar em contato para maiores detalhes sobre o carro.'
           }
-          isOpen={isModalOpen}
+          isopen={isModalOpen}
         />
       )}
     </Container>

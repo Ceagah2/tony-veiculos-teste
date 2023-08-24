@@ -2,7 +2,7 @@ import styled, { css, keyframes } from 'styled-components';
 import { theme } from '../../../styles/theme';
 
 interface ContainerProps {
-  isOpen: boolean;
+  isopen: boolean;
 }
 
 export const Container = styled.div`
@@ -24,18 +24,18 @@ export const Content = styled.div<ContainerProps>`
   border: none;
   border-radius: 20px;
   position: fixed;
-  top: ${({ isOpen }) => (isOpen ? '30%' : '-150px')};
+  top: ${({ isopen }) => (isopen ? '30%' : '-150px')};
   left: 30%;
   transition: top 0.3s ease-in-out;
 
-  ${({ isOpen }) =>
-    isOpen &&
+  ${({ isopen }) =>
+    isopen &&
     css`
       animation: ${slideIn} 0.3s forwards;
     `}
 
-  ${({ isOpen }) =>
-    !isOpen &&
+  ${({ isopen }) =>
+    !isopen &&
     css`
       animation: ${slideOut} 0.3s forwards;
     `}
