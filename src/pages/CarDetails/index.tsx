@@ -16,7 +16,6 @@ import Loader from '../../components/atoms/Loader';
 import TextInput from '../../components/atoms/TextInput';
 import Alert from '../../components/molecules/Alert';
 import { Api } from '../../services/api';
-import { theme } from '../../styles/theme';
 import { formatPhoneNumber, isValidEmail } from '../../utils';
 import {
   CarContainer,
@@ -207,23 +206,18 @@ const CarDetails = () => {
             />
           </LeadInputsContainer>
           {emailError && (
-            <ErrorMessage>
+            <ErrorMessage data-testid="email-error">
               E-mail incorreto. Por favor verifique e tente novamente
             </ErrorMessage>
           )}
           {dataError && (
-            <ErrorMessage>
+            <ErrorMessage data-testid="data-error">
               Todos os campos são obrigatórios para que nossa equipe entre em
               contato com você.
             </ErrorMessage>
           )}
           <LeadButtonContainer>
-            <Button
-              text="Quero comprar"
-              onClick={() => handleSendData()}
-              textColor={theme.colors.white}
-              backgroundColor={theme.colors.blue}
-            />
+            <Button text="Quero comprar" onClick={() => handleSendData()} />
           </LeadButtonContainer>
         </LeadContainer>
       </Content>

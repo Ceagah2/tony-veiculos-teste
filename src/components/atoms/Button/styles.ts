@@ -1,21 +1,14 @@
 import styled from 'styled-components';
 import { theme } from '../../../styles/theme';
 
-type ButtonStyleProps = {
-  backgroundColor?: string;
-};
 
-export const Container = styled.button.attrs<ButtonStyleProps>(
-  ({ backgroundColor }) => ({
-    backgroundColor,
-  }),
-)`
+export const Container = styled.button`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: ${(props) => props.backgroundColor ?? theme.colors.blue};
+  background: ${ theme.colors.blue};
   cursor: pointer;
   border-radius: 30px;
   border: none;
@@ -37,12 +30,8 @@ export const Container = styled.button.attrs<ButtonStyleProps>(
   }
 `;
 
-type ButtonTextProps = {
-  textColor: string;
-};
-
-export const ButtonText = styled.span<ButtonTextProps>`
-  color: ${(props) => props.textColor ?? theme.colors.white};
+export const ButtonText = styled.span`
+  color: ${theme.colors.white};
   font-family: ${theme.fonts.subHeading};
   font-size: ${theme.fontSizes.subHeading};
 `;
