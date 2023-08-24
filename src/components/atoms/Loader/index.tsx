@@ -1,12 +1,12 @@
-import './styles.css';
+import { Container, Div1, Div2, Div3 } from './styles';
 const Loader = () => {
   return (
-    <div className="lds-ring" data-testid="loader">
+    <Container data-testid="loader">
+      <Div1></Div1>
+      <Div2></Div2>
+      <Div3></Div3>
       <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+    </Container>
   );
 };
 
