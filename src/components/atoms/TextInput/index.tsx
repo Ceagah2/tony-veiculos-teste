@@ -4,8 +4,8 @@ import { Container, Input, InputLabel } from './styles';
 const TextInput = (props: TextInputProps) => {
   return (
     <Container>
-      <InputLabel>{props.label}</InputLabel>
-      <Input {...props} />
+      <InputLabel htmlFor={props.for}>{props.label}</InputLabel>
+      <Input {...props} id={props.id} />
     </Container>
   );
 };
