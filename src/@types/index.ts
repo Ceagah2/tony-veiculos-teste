@@ -30,6 +30,7 @@ export interface CardProps extends VehicleProps {
 
 export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  for: string;
 }
 
 export interface ButtonsProps {
@@ -47,5 +48,9 @@ export interface AlertProps {
   title: string;
   text: string;
   onClose: () => void;
-  isOpen: boolean;
+  isopen: boolean;
+}
+
+export interface CarDetailsProps {
+  handleSendData?: () => void;
 }
