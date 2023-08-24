@@ -57,4 +57,13 @@ To avoid creating a local mock file and paying to access the FIPE table, I went 
 
 - Now you just should open in your browser the application, that is at `http://localhost:5173/`
 
+## How to test the project
+
+- Once you already installed all the dependencies to run, to test you just should run:  
+  `npm run test`  
+   or  
+  `yarn test`
+
+- You'll see not too much tests, but effective ones.
+
 ## Developed with ♥ by [Fantasy Forge](https://www.linkedin.com/in/carlosceagah)
