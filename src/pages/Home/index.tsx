@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { lazy, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { type VehicleProps } from '../../@types';
 import Container from '../../components/atoms/Container';
@@ -21,11 +21,13 @@ const Home = () => {
   const navigate = useNavigate();
   const NoImage = 'https://tonyveiculos.com.br/img/carro-semfoto.png';
   const [carsData, setCarsData] = useState<VehicleProps[]>([]);
-  const [errorMessage, setErrorMessage] = useState<boolean>();
+  const [errorMessage, setErrorMessage] = useState<boolean>(false);
   const [carImage, setCarImage] = useState<string>();
+  const [isLoading, setIsLoading] = useState<boolean>();
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       await Api.get(`/vehicles?limit=${LIMIT}&offset=${OFFSET}`).then(
         (response) => {
           if (response.data.message === 'Vehicles found successfully') {
@@ -53,6 +55,7 @@ const Home = () => {
           }
         },
       );
+      setIsLoading(false);
     };
     fetchData();
   }, []);
@@ -66,31 +69,30 @@ const Home = () => {
             Encontre aqui os melhores carros disponíveis no mercado.
           </HeaderText>
         </ContentHeader>
-        <CardsContainer>
-          <Suspense fallback={<Loader />}>
-            {errorMessage ? (
-              <ErrorContainer data-testid="error-message">
-                <ErrorText>Não há carros disponíveis</ErrorText>
-              </ErrorContainer>
-            ) : (
-              carsData.map((car: VehicleProps) => (
-                <Card
-                  photos={carImage}
-                  key={car.id}
-                  make={car.make}
-                  model={car.model}
-                  modelYear={car.modelYear}
-                  price={car.price}
-                  optional={car.optional}
-                  fipeId={car.fipeId}
-                  fabricationYear={car.fabricationYear}
-                  fuelType={car.fuelType}
-                  kmVehicle={car.kmVehicle}
-                  onClick={() => navigate(`/car/${car.id}`)}
-                />
-              ))
-            )}
-          </Suspense>
+        <CardsContainer data-testid="cards-container">
+          {isLoading && <Loader />}
+          {errorMessage ? (
+            <ErrorContainer data-testid="error-message">
+              <ErrorText>Não há carros disponíveis</ErrorText>
+            </ErrorContainer>
+          ) : (
+            carsData.map((car: VehicleProps) => (
+              <Card
+                photos={carImage}
+                key={car.id}
+                make={car.make}
+                model={car.model}
+                modelYear={car.modelYear}
+                price={car.price}
+                optional={car.optional}
+                fipeId={car.fipeId}
+                fabricationYear={car.fabricationYear}
+                fuelType={car.fuelType}
+                kmVehicle={car.kmVehicle}
+                onClick={() => navigate(`/car/${car.id}`)}
+              />
+            ))
+          )}
         </CardsContainer>
       </Content>
     </Container>
